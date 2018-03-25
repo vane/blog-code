@@ -10,4 +10,4 @@ enable_utc = True
 
 broker_url = 'redis://localhost:6379/1'
 
-result_backend = 'db+postgresql://postgres:postgres@localhost:5432/celery_results'
+result_backend = 'db+sqlite:///result.db'
