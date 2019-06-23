@@ -51,15 +51,15 @@ export const customTheme = createMuiTheme({
       disabledBackground: '#000',
     },
     text: {
-      primary: '#000',
-      secondary: '#000',
-      disabled: '#000',
-      hint: '#000',
-      icon: '#000',
+      primary: '#fff',
+      secondary: '#fff',
+      disabled: '#fff',
+      hint: '#fff',
+      icon: '#fff',
     },
     common: {
       black: '#000',
-      white: '#000',
+      white: '#fff',
     },
     background: {
       default: '#000',
@@ -69,7 +69,18 @@ export const customTheme = createMuiTheme({
   overrides: {
     MuiAppBar: {
       colorDefault: {
+        color: '#fff',
         backgroundColor: '#000',
+      }
+    },
+    MuiIconButton: {
+      root: {
+        color: '#fff',
+      }
+    },
+    MuiSvgIcon: {
+      root: {
+        fill: '#fff',
       }
     }
   }
