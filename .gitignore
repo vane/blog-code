@@ -3,3 +3,8 @@
 .DS_Store
 # idea
 *.iml
+
+# js
+node_modules
+build
+yarn.lock
