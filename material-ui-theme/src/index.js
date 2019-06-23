@@ -18,8 +18,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-//import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles/index'
 const drawerWidth = 240;
+
+export const customTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,6 +98,7 @@ const PersistentDrawerLeft = () => {
   }
 
   return (
+    <MuiThemeProvider theme={customTheme}>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -178,6 +186,7 @@ const PersistentDrawerLeft = () => {
         </Typography>
       </div>
     </div>
+    </MuiThemeProvider>
   );
 }
 
