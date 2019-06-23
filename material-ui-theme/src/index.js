@@ -66,6 +66,13 @@ export const customTheme = createMuiTheme({
       paper: '#000',
     },
   },
+  overrides: {
+    MuiAppBar: {
+      colorDefault: {
+        backgroundColor: '#000',
+      }
+    }
+  }
 });
 
 const useStyles = makeStyles(theme => ({
