@@ -1,16 +1,18 @@
 # mac
 *~
 .DS_Store
-# idea
+
+# Intellij
+.idea
 *.iml
 
-#python
+# Python
 .pyc
 env
 __pycache__
-docker/data
+data
 
-# js
+# JS
 node_modules
 build
 yarn.lock
