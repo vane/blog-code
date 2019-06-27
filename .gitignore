@@ -4,6 +4,12 @@
 # idea
 *.iml
 
+#python
+.pyc
+env
+__pycache__
+docker/data
+
 # js
 node_modules
 build
