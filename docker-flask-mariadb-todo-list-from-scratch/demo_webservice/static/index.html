@@ -30,6 +30,7 @@ const constraint = {
 // Event handlers
 
 const handleTodoCheck = (e) => {
+	// REST check / uncheck todo
 	const t = e.target;
 	const id = t.getAttribute('todo-id');
 	const checked = t.hasAttribute('checked') ? 'uncheck' : 'check';
@@ -39,6 +40,7 @@ const handleTodoCheck = (e) => {
 }
 
 const handleTodoAdd = () => {
+	// REST add todo to database
 	const tf = dcl('todo-add-title')[0];
 	const df = dcl('todo-add-description')[0];
 	const title = tf.value;
@@ -58,11 +60,13 @@ const handleTodoAdd = () => {
 }
 
 const handleTodoEdit = (e) => {
+	// Mouse event handler for edit todo
 	const id = e.target.getAttribute('todo-id');
 	todoEditRender(id);
 }
 
 const handleTodoSave = (e) => {
+	// REST save edited todo
 	const id = e.target.getAttribute('todo-id');
 	const tf = dcl(`todo-edit-title-${id}`)[0];
 	const df = dcl(`todo-edit-description-${id}`)[0];
@@ -87,6 +91,7 @@ const handleTodoHide = (e) => {
 }
 
 const todoEditRender = (id) => {
+	// Render edit form of todo by id
 	const title = dcl(`todo-title-${id}`)[0].innerHTML;
 	const description = dcl(`todo-description-${id}`)[0].innerHTML
 	const tpl = `<div class='todo-edit-form'>
@@ -124,6 +129,7 @@ const todoRender = (json) => {
 
 // RELOAD 
 const reloadTodoList = () => {
+	// reload whole todo list
 	todoLoad().then(todoRender);
 };
 

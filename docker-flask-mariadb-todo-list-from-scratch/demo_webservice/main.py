@@ -11,6 +11,7 @@ class DB:
   connection = None
   @staticmethod
   def connect():
+    # Custom converter for tinyint to boolean
     conv = converters.conversions
     def bool_decoder(val):
       if int(val) == 0:
