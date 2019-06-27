@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<title>TODO</title>
+</head>
+<body>
+<div>
+	<span style='font-size:2em'>Todo list : </span>
+</div>
+<div>
+	<span>Hide Checked</span>
+	<input class='todo-hide-checked' checked='true' type='checkbox' onchange='handleTodoHide(event)' />	
+</div>
+<div>
+	<input class='todo-add-title' placeholder='title' type='text' />
+	<input class='todo-add-description' placeholder='description' type='text' />
+	<button onclick='handleTodoAdd(event)'>Add</button>
+</div>	
+<div id='todoList'>			
+</div>						
+<script>
+const d = document;
+const did = d.getElementById.bind(d);
+const dcl = d.getElementsByClassName.bind(d);
+const constraint = {
+	hideDone: false,
+	err: '1px solid red',
+};
+
+// Event handlers
+
+const handleTodoCheck = (e) => {
+	const t = e.target;
+	const id = t.getAttribute('todo-id');
+	const checked = t.hasAttribute('checked') ? 'uncheck' : 'check';
+	fetch(`/todo/${id}/${checked}`).then(() => {
+		reloadTodoList();
+	});
+}
+
+const handleTodoAdd = () => {
+	const tf = dcl('todo-add-title')[0];
+	const df = dcl('todo-add-description')[0];
+	const title = tf.value;
+	const description = df.value;
+	fetch(`/todo`, {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json', },
+		body: JSON.stringify({title, description}),
+	}).then((response) => response.json()).then(() => {
+		tf.value = df.value = '';
+		tf.style.border = df.style.border = '';
+		reloadTodoList();
+	}).catch(() => {
+		tf.style.border = constraint.err;
+		df.style.border = constraint.err;
+	});	
+}
+
+const handleTodoEdit = (e) => {
+	const id = e.target.getAttribute('todo-id');
+	todoEditRender(id);
+}
+
+const handleTodoSave = (e) => {
+	const id = e.target.getAttribute('todo-id');
+	const tf = dcl(`todo-edit-title-${id}`)[0];
+	const df = dcl(`todo-edit-description-${id}`)[0];
+	const title = tf.value;
+	const description = df.value;
+	fetch(`/todo/${id}`, {
+		method: 'PUT',
+		headers: {'Content-Type': 'application/json', },
+		body: JSON.stringify({title, description}),
+	}).then((response) => response.json()).then(() => {
+		reloadTodoList();
+	}).catch(() => {
+		tf.style.border = constraint.err;
+		df.style.border = constraint.err;
+	})	
+}
+
+const handleTodoHide = (e) => {
+	// show / hide done items
+	constraint.hideDone = e.target.checked;
+	reloadTodoList();
+}
+
+const todoEditRender = (id) => {
+	const title = dcl(`todo-title-${id}`)[0].innerHTML;
+	const description = dcl(`todo-description-${id}`)[0].innerHTML
+	const tpl = `<div class='todo-edit-form'>
+		<input class='todo-edit-title-${id}' type='text' value='${title}' />
+		<input class='todo-edit-description-${id}' type='text' value='${description}' />
+		<button class='todo-save-button-${id}' todo-id='${id}'>save</button>
+	</div>`
+	dcl(`todo-list-item-${id}`)[0].innerHTML = tpl;	
+	dcl(`todo-save-button-${id}`)[0].addEventListener('click', handleTodoSave);
+}
+
+const todoRender = (json) => {
+	// render todo list
+	let data  = ''				
+	json.forEach((todo) => {
+		const checked = todo.is_done ? 'checked' : '';
+		const disabled = todo.is_done ? 'disabled' : '';
+		// todo list item template
+		const tpl = `<div>
+		<div class='todo-list-item-${todo.id}'>
+			<input class='todo-checked' todo-id='${todo.id}' 
+						type='checkbox' ${checked} 
+						todo-checked='${todo.is_done}' />
+			<span class='todo-title-${todo.id}'>${todo.title}</span>				
+			<span> - </span>
+			<span class='todo-description-${todo.id}'>${todo.description}</span>
+			<button class='todo-edit-btn' todo-id='${todo.id}' ${disabled}>edit</button>
+		</div></div>`;
+		if(constraint.hideDone && todo.is_done) {} else {data += tpl;}		
+	});
+	did('todoList').innerHTML = data;
+	Array.from(dcl('todo-checked')).forEach((el) => el.addEventListener('change', handleTodoCheck));
+	Array.from(dcl('todo-edit-btn')).forEach((el) => el.addEventListener('click',handleTodoEdit));
+}
+
+// RELOAD 
+const reloadTodoList = () => {
+	todoLoad().then(todoRender);
+};
+
+const todoLoad = (checked) => {
+	return fetch('/todo').then((response) => {
+		return response.json();
+	})
+}
+d.addEventListener('DOMContentLoaded', () => {
+	constraint.hideDone = dcl('todo-hide-checked')[0].checked;
+	reloadTodoList();
+});
+</script>
+</body>
+</html>

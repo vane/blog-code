@@ -1,0 +1,38 @@
+version: '2'
+services:
+  demo_db:
+    build: ./demo_db
+    image: demo_db
+    container_name: demo_db
+    hostname: demo_db
+    restart: always
+    networks:
+      - demo_network
+    volumes:
+      - ./data/demo_db:/var/lib/mysql      
+    environment:
+      MYSQL_ROOT_PASSWORD: demo
+      MYSQL_DATABASE: demo
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+  demo_webservice:
+    build: ./demo_webservice
+    image: demo_webservice
+    container_name: demo_webservice
+    hostname: demo_webservice
+    restart: always
+    networks:
+      - demo_network
+    depends_on:
+      - demo_db
+    volumes:
+      - ../demo_webservice:/code
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    command: ['python', 'main.py']
+networks:
+  demo_network:
