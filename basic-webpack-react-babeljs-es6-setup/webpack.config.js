@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const Copy = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'none',
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: __dirname + '/build',
