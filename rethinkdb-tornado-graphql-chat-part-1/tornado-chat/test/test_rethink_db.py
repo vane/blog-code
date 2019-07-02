@@ -8,7 +8,3 @@ import functools
 r = rethinkdb.RethinkDB()
 r.set_loop_type("tornado")
 connection = r.connect(host='localhost', port=28015)
-
-async def resolve_foo(self, info):
-    foo = await db.get_foo()
-    return foo
