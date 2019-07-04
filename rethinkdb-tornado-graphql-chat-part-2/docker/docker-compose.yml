@@ -1,0 +1,22 @@
+version: '2'
+services:
+  chat_db:
+    image: rethinkdb:2.3.6
+    container_name: chat_db
+    hostname: chat_db
+    restart: always
+    networks:
+      - chat_network
+    volumes:
+      - ./data/chat_db:/data
+    environment:
+      MYSQL_ROOT_PASSWORD: demo
+      MYSQL_DATABASE: demo
+    expose:
+      - 28015
+    ports:
+      - 8080:8080
+      - 28015:28015
+      - 29015:29015
+networks:
+  chat_network:
