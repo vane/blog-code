@@ -35,7 +35,6 @@ export const ChatDrawer = ({modelState, modelActions}) => {
   }
 
   const handleRemoveDirectChat = () => {
-    console.log('siema');
   }
 
   return (
