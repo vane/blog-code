@@ -14,7 +14,7 @@ export const ChatBar = ({modelState, modelActions}) => {
     modelActions.drawerVisible(true);
   }
   return (
-    <AppBar
+    <AppBar style={{flexShrink:0}}
       position="fixed"
       color="default">
       <Toolbar

@@ -7,6 +7,7 @@ const modelState = {
   roomList: ['general', 'test'],
   myself: 'testUser',
   directList: ['testUser'],
+  messageList: [],
 }
 
 const modelStateActions = {
@@ -24,6 +25,10 @@ const modelStateActions = {
   removeRoom: (store, value) => {
     store.state.roomList = store.state.roomList.filter((val) => val !== value);
     store.setState({roomList: store.state.roomList});
+  },
+  addMessage: (store, value) => {
+    store.state.messageList.push(value);
+    store.setState({messageList: store.state.messageList});
   },
 }
 

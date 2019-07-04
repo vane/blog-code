@@ -1,6 +1,6 @@
-import { createMuiTheme, makeStyles, useTheme } from '@material-ui/core/styles/index'
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles/index'
 
-const drawerWidth = 240;
+export const drawerWidth = 240;
 export const customTheme = createMuiTheme({
   palette: {
     primary: {
@@ -74,22 +74,9 @@ export const themeStyles = makeStyles(theme => ({
   roomDrawerLabel: {
     paddingLeft: '10px',
   },
-  chatInput: {
-    width: `calc(100% - ${drawerWidth}px)`,
-  },
-  chatInputContainer: {
-    width: `calc(100% - ${drawerWidth/2}px)`,
-    position: 'absolute',
-    bottom: '20px',
-
-  },
-  chatContent: {
-    margin: 0,
-    padding: 0,
-    height: '100vh',
-  },
   root: {
     display: 'flex',
+    flexDirection: 'column',
   },
   appBarFull: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -105,6 +92,13 @@ export const themeStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -117,29 +111,5 @@ export const themeStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-  content: {
-    flexGrow: 1,
-    height: '90vh',
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
   },
 }));
