@@ -75,15 +75,18 @@ export const themeStyles = makeStyles(theme => ({
     paddingLeft: '10px',
   },
   chatInput: {
-    width: '100%',
+    width: `calc(100% - ${drawerWidth}px)`,
+  },
+  chatInputContainer: {
+    width: `calc(100% - ${drawerWidth/2}px)`,
+    position: 'absolute',
+    bottom: '20px',
+
   },
   chatContent: {
     margin: 0,
     padding: 0,
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    height: '100vh',
   },
   root: {
     display: 'flex',
