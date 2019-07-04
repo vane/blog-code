@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
 import { drawerWidth, themeStyles } from './customTheme'
@@ -38,10 +38,18 @@ const styles = makeStyles(theme => ({
 
 export const ChatContent = ({modelState, modelActions}) => {
   const classes = styles();
+  
+  const messagesEndRef = useRef(null)
 
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView();
+  }
+  if(messagesEndRef != null && messagesEndRef.current != null) scrollToBottom();
+  
   return (<div className={clsx(classes.content, { [classes.contentShift]: modelState.drawerOpen })}>
     {modelState.messageList.map((text, i) => {
       return <Typography className={classes.chatMessage} key={`msg_${i}`}>{text}</Typography>
     })}
+    <div ref={messagesEndRef} style={{marginBottom:'25px'}}/>
   </div>);
 }
