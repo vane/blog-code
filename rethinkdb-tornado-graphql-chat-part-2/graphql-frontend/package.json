@@ -1,0 +1,29 @@
+{
+  "name": "graphql-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "postinstall": "webpack"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.1.1",
+    "@material-ui/icons": "^4.2.0",
+    "apollo-boost": "^0.4.3",
+    "graphql": "^14.4.1",
+    "graphql-tag": "^2.10.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "use-global-hook": "^0.1.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.3",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
